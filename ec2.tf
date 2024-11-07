@@ -10,17 +10,6 @@ resource "aws_instance" "worker1" {
     Name = "Ansible Worker1"
   }
 
-  user_data = <<-EOF
-#!/bin/bash
-useradd abhi
-echo "redhat" | passwd --stdin abhi
-sed -i "/PasswordAuthentication/s/no/yes/" /etc/ssh/sshd_config
-sed -i "/PasswordAuthentication/s/no/yes/" /etc/ssh/sshd_config.d/50-cloud-init.conf || true
-systemctl restart sshd
-echo "abhi ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-EOF
-}
-
 # Output the instance's public IP
 output "worker1_public_ip" {
   value = aws_instance.worker1.public_ip
