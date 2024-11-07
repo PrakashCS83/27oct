@@ -1,6 +1,6 @@
 ---
 - name: Install and configure Apache Tomcat on RHEL 9.4
-  hosts: 3.110.153.220
+  hosts: all
   become: true
 
   vars:
